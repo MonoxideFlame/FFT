@@ -8,6 +8,5 @@ I was interested also in the number theorertic variant, done over the ring Z(2^n
 
 I might have broken it at some point, but it seems to work. 
 
-
-
+The convolution works well. 
 
