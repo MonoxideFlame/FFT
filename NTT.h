@@ -1,9 +1,14 @@
 #include <stdio.h>
-typedef unsigned int U32;//should be fine, not serious code
 
-void FFT_evaluate(U32* arr, U32 size, U32 m);
-void FFT_interpolate(U32* arr, U32 size, U32 m);
+#include <stdint.h>
+typedef uint64_t U64;
+typedef uint32_t U32;
 
-void FFT_DIT(U32* arr, U32 size, U32 m);
-void FFT_DIF(U32* arr, U32 size, U32 m);
+void NTT_evaluate(U64* arr, U64 size);
+void NTT_interpolate(U64* arr, U64 size);
+
+U64 multiply_goldilocks(U64 a, U64 b);
+
+void NTT_convolve(U64* result, U64* a, U64* b, U64 size);
+
 

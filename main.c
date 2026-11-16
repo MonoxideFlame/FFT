@@ -7,33 +7,45 @@
 
 #include <stdio.h>
 #include "NTT.h"
+
+
 int main(int argc, const char** argv){
-    U32 size = 16;
-	U32 a[16] = {0,1,1,1,
-				   1,1,1,0,
-				   0,0,0,0,
-				   0,0,0,0}; 
+    U64 size = 32;
+	U64 a[32] = {1,1,1,1,1,1,1,1,
+		         1,1,1,1,1,1,1,1,
+		         0,0,0,0,0,0,0,0,
+		         0,0,0,0,0,0,0,0};
 
+	U64 b[32] = {1,1,1,1,1,1,1,1,
+		         1,1,1,1,1,1,1,1,
+		         0,0,0,0,0,0,0,0,
+		         0,0,0,0,0,0,0,0};
 
+	U64 c[32];
 
 	for (int i = 0; i < size; i++){
-		printf("%d, ", a[i]);
+		printf("%llu, ", a[i]);
 	}
 	printf("\n ");
 
-	U32 m  = 65537;
-	FFT_evaluate(a, size, m);
 
-	for (int i = 0; i < size; i++){
-		a[i] = (a[i] * a[i]) % m;
-		printf("%d, ", a[i]);
+	for(int i = 0; i < 5; i++){
+		NTT_convolve(c, a, b, size);	
+		//decimate and quantize
+		for(int j = 0; j < size/2; j++){
+			a[j] = c[2*j] / (4 - 2*(i%2);
+			b[j] = c[2*j] / (4 - 2*(i%2);
+		}
+		for(int j = size/2; j < size; j++){
+			a[j] = 0;
+			b[j] = 0;
+		}
 	}
-	printf("\n ");
+	NTT_convolve(c, a, b, size);	
 
-	FFT_interpolate(a, size, m);
 
 	for (int i = 0; i < size; i++){
-		printf("%d, ", a[i]);
+		printf("%llu, ", c[i]);//looks gaussian
 	}
 
 	return 0;
