@@ -1,6 +1,6 @@
 #include "NTT.h"
-U32 principalRootsForward[] = {, , , };
-U32 principalRootsReverse[] = {4096, 2047, 3073, 3585};
+U32 principalRootsForward[] = {65536, 256, 16, 4, 2, 1};
+U32 principalRootsReverse[] = {65536, -256+65537, -4096+65537, -16384+65537, -32768+65537};
 
 static U32 bitReverse(U32 a){
 	a = ((a & 0xaaaaaaaa) >> 1) | ((a & 0x55555555) << 1);
@@ -56,6 +56,10 @@ void FFT_evaluate(U32* arr, U32 size, U32 m){
 }
 void FFT_interpolate(U32* arr, U32 size, U32 m){
 	transform(arr, size, 1, m);
+	int size_inv = m - (m-1)/size;//specifically for the fermat transform
+	for(int i = 0; i < size; i++){
+		arr[i] = (arr[i] * size_inv) % m;
+	}
 }
 
 void FFT_DIT(U32* arr, U32 size, U32 m){}
