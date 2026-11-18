@@ -14,7 +14,8 @@ space dedicated to holding that one extra code. A 33 or 65 bit word is awkward. 
 Right now, for a 64 bit depth, this is fine. I have it convolving and decimating a sequence over and over again to create a gaussian pulse.
 It seems to work. It also showcases the Central Limit Theorem too. 
 
-If I were to increase the size of the transform to include thousands of possible digits, then a Schoenhage-Strassen implementation can take advantage of this. 
+
+In the future, I could base a Schoenhage-Strassen implementation off of this. 
 
 
 
